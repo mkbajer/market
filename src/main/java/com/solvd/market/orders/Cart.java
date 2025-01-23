@@ -8,8 +8,8 @@ import java.util.List;
 public class Cart {
 
     private Long id;
-    private List<User> users;
-    private List<Product> product;
+    private User user;
+    private List<Product> products;
 
     public Long getId() {
         return id;
@@ -19,19 +19,19 @@ public class Cart {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public List<Product> getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

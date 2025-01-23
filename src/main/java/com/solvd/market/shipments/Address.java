@@ -8,7 +8,7 @@ public class Address {
     private Integer flatNr;
     private Integer city;
     private Integer postCode;
-    private Shipment shipment;
+
 
     public Long getId() {
         return id;
@@ -58,11 +58,4 @@ public class Address {
         this.postCode = postCode;
     }
 
-    public Shipment getShipment() {
-        return shipment;
-    }
-
-    public void setShipment(Shipment shipment) {
-        this.shipment = shipment;
-    }
 }
