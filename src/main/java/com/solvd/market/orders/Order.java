@@ -1,7 +1,7 @@
-package orders;
+package com.solvd.market.orders;
 
-import payments.Payment;
-import shipments.Shipment;
+import com.solvd.market.payments.Payment;
+import com.solvd.market.shipments.Shipment;
 
 public class Order {
 

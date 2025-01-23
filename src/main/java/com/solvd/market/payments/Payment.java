@@ -1,6 +1,6 @@
-package payments;
+package com.solvd.market.payments;
 
-import orders.Order;
+import com.solvd.market.orders.Order;
 
 public class Payment {
 

@@ -1,7 +1,7 @@
-package users;
+package com.solvd.market.users;
 
-import orders.Cart;
 
+import com.solvd.market.orders.Cart;
 
 public class User {
 

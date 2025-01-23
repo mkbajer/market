@@ -1,4 +1,4 @@
-package products;
+package com.solvd.market.products;
 
 import java.util.List;
 

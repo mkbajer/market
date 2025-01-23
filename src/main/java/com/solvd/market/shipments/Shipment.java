@@ -1,4 +1,4 @@
-package shipments;
+package com.solvd.market.shipments;
 
 public class Shipment {
 
