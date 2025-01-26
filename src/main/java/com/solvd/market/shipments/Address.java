@@ -6,8 +6,8 @@ public class Address {
     private String street;
     private Integer homeNr;
     private Integer flatNr;
-    private Integer city;
-    private Integer postCode;
+    private String city;
+    private String postCode;
 
 
     public Long getId() {
@@ -42,19 +42,19 @@ public class Address {
         this.flatNr = flatNr;
     }
 
-    public Integer getCity() {
+    public String getCity() {
         return city;
     }
 
-    public void setCity(Integer city) {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public Integer getPostCode() {
+    public String getPostCode() {
         return postCode;
     }
 
-    public void setPostCode(Integer postCode) {
+    public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 

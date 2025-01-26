@@ -1,5 +1,9 @@
 package com.solvd.market.users;
 
+import com.solvd.market.orders.Cart;
+
+import java.util.List;
+
 public class User {
 
     private Long id;
@@ -10,6 +14,7 @@ public class User {
     private String phone;
     private Boolean type;
     private Boolean active;
+    private List<Cart> carts;
 
     public Long getId() {
         return id;
@@ -73,5 +78,13 @@ public class User {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
     }
 }
