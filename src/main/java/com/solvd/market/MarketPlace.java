@@ -2,13 +2,13 @@ package com.solvd.market;
 
 import com.solvd.market.users.User;
 
-import java.util.Set;
+import java.util.List;
 
-public class MarketPlaces {
+public class MarketPlace {
 
     private Long id;
     private String name;
-    private Set<User> users;
+    private List<User> users;
 
     public Long getId() {
         return id;
@@ -26,11 +26,11 @@ public class MarketPlaces {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }

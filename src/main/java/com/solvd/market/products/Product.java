@@ -1,10 +1,13 @@
 package com.solvd.market.products;
 
+import java.util.List;
+
 public class Product {
 
     private Long id;
     private String name;
     private Double price;
+    private List<Category> categories;
 
     public Long getId() {
         return id;
@@ -30,4 +33,11 @@ public class Product {
         this.price = price;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
 }

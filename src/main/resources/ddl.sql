@@ -18,14 +18,16 @@ create table if not exists user (
     type tinyint(0) NOT NULL DEFAULT 0,
     active tinyint(0) NOT NULL DEFAULT 0,
     PRIMARY KEY (id),
-    CONSTRAINT fk_users_market_places_id FOREIGN KEY(market_places_id) REFERENCES market_places(id)
+    CONSTRAINT fk_user_market_places_id FOREIGN KEY(market_places_id) REFERENCES market_places(id)
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 );
 
 create table if not exists cart (
     id serial,
-    PRIMARY KEY (id)
+    user_id BIGINT UNSIGNED NOT NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT fk_cart_user_id FOREIGN KEY(user_id) REFERENCES user(id)
 );
 
 create table if not exists orders (
@@ -51,10 +53,10 @@ create table if not exists address (
     id serial,
     shipment_id BIGINT UNSIGNED NOT NULL,
     street VARCHAR(45),
-    home INTEGER,
-    flat INTEGER,
+    home_nr INTEGER,
+    flat_nr INTEGER,
     city VARCHAR(45),
-    postcode VARCHAR(45),
+    post_code VARCHAR(45),
     PRIMARY KEY (id),
     CONSTRAINT fk_address_shipment_id FOREIGN KEY (shipment_id) REFERENCES shipment(id)
         ON UPDATE NO ACTION
