@@ -1,4 +1,4 @@
-package com.solvd.market.payments;
+package com.solvd.market.domain.payments;
 
 public class Payment {
 

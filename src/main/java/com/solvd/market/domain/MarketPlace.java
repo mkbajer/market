@@ -1,6 +1,6 @@
-package com.solvd.market;
+package com.solvd.market.domain;
 
-import com.solvd.market.users.User;
+import com.solvd.market.domain.users.User;
 
 import java.util.List;
 

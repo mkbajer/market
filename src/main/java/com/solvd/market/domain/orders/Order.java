@@ -1,7 +1,7 @@
-package com.solvd.market.orders;
+package com.solvd.market.domain.orders;
 
-import com.solvd.market.payments.Payment;
-import com.solvd.market.shipments.Shipment;
+import com.solvd.market.domain.payments.Payment;
+import com.solvd.market.domain.shipments.Shipment;
 
 public class Order {
 

@@ -1,4 +1,4 @@
-package com.solvd.market.shipments;
+package com.solvd.market.domain.shipments;
 
 public class Address {
 

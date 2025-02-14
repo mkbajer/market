@@ -1,6 +1,6 @@
-package com.solvd.market.users;
+package com.solvd.market.domain.users;
 
-import com.solvd.market.orders.Cart;
+import com.solvd.market.domain.orders.Cart;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.solvd.market.products;
+package com.solvd.market.domain.products;
 
 public class Discount {
 
