@@ -12,14 +12,14 @@ import java.util.List;
 public class MarketPlaceRepositoryImpl implements MarketPlaceRepository {
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
-    private static final String INSERT_QUERY = "INSERT INTO MarketPlaces (name) VALUES (?)";
+    private static final String INSERT_QUERY = "INSERT INTO market_places (name) VALUES (?)";
     private static final String FIND_ALL_QUERY = "SELECT mp.id as marketplace_id, mp.name as marketplace_name, " +
-            "u.id as user_id, u.username as user_name " +
-            "FROM MarketPlaces mp " +
-            "LEFT JOIN Users u ON mp.id = u.marketplace_id";
+            "u.id as user_id, u.name as user_name " +
+            "FROM market_places mp " +
+            "LEFT JOIN Users u ON mp.id = u.market_places_id";
     private static final String FIND_BY_ID_QUERY = FIND_ALL_QUERY + " WHERE mp.id = ?";
-    private static final String UPDATE_QUERY = "UPDATE MarketPlaces SET name = ? WHERE id = ?";
-    private static final String DELETE_QUERY = "DELETE FROM MarketPlaces WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE market_places SET name = ? WHERE id = ?";
+    private static final String DELETE_QUERY = "DELETE FROM market_places WHERE id = ?";
 
     private static List<MarketPlace> mapMarketPlaces(ResultSet rs) throws SQLException {
         List<MarketPlace> marketPlaces = new ArrayList<>();
