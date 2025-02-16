@@ -26,14 +26,15 @@ DELETE FROM user WHERE id > 4; -- deleting user where id is gretear than 4
 ALTER TABLE category ADD valid VARCHAR(15); -- adding a row to the table
 ALTER TABLE category DROP COLUMN valid; -- deleting the row from the table
 ALTER TABLE category RENAME TO basket; -- renaming table name to basket
-ALTER TABLE market_places RENAME COLUMN name TO store; -- renaming coulumn name 'name' to 'store'
+ALTER TABLE market_places CHANGE COLUMN name store VARCHAR(45); -- renaming coulumn name 'name' to 'store'
+ALTER TABLE user MODIFY email VARCHAR(100) NOT NULL; -- changing size of the email field
 ALTER TABLE address MODIFY post_code INT; -- modyfinig type of data on post_code to INT
 
 SELECT name, COUNT(*) AS store_users FROM market_places GROUP BY name; -- counitng how many stores of a kind appears in market_places
 SELECT MAX(amount)AS max_disc,name FROM discount GROUP BY name; -- finding the max amount of discount by the discount name
 SELECT name, COUNT(*) AS store_users FROM market_places GROUP BY name HAVING COUNT(*) > 2; -- showing all market places where there is more than 2 users
 SELECT price,name FROM product HAVING price > 100 ORDER BY price DESC; -- showing all product with value over 100 descending order
-
+SELECT cart_id, COUNT(*) AS total_orders FROM orders GROUP BY cart_id HAVING COUNT(*) > 5; -- total number of orders per cart where the number of orders is greater than 5
 
 SELECT a.street, a.city, s.courier FROM address a JOIN shipment s ON a.shipment_id = s.id; -- joining shipment courier name with street and city where the package will go, using inner join to catch only rows with matching data in both tables
 SELECT p.name, c.name AS category_name FROM product p RIGHT JOIN category c ON p.category_id =c.id; -- joining product and its category name , showing all rows from the right (category) table with matched rows from the right table 
@@ -42,3 +43,12 @@ SELECT m.name AS store, u.name, u.surname FROM user u LEFT JOIN market_places m 
 SELECT m.name AS store, u.name, u.surname FROM user u LEFT JOIN market_places m ON u.market_places_id = m.id 
 UNION 
 SELECT m.name AS store, u.name, u.surname FROM user u RIGHT JOIN market_places m ON u.market_places_id = m.id; -- using union for outher join, seleciting all users and stores including unmatched records
+
+SELECT u.name AS user_name, u.surname AS user_surname, c.id AS cart_id, o.id AS order_id, 
+       s.courier AS shipment_courier, a.city AS delivery_city, a.street AS delivery_street, a.post_code AS delivery_post_code
+FROM user u
+JOIN cart c ON u.id = c.user_id
+JOIN orders o ON c.id = o.cart_id
+JOIN shipment s ON o.id = s.orders_id
+JOIN address a ON s.id = a.shipment_id
+WHERE u.active = 1;
