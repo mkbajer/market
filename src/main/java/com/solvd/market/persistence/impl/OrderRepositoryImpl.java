@@ -15,22 +15,24 @@ public class OrderRepositoryImpl implements OrderRepository {
     private static final String INSERT_QUERY = "INSERT INTO orders (payment_id, shipment_id, cart_id) VALUES (?, ?, ?)";
     private static final String FIND_ALL_QUERY = "SELECT * FROM orders";
     private static final String FIND_BY_ID_QUERY = "SELECT * FROM orders WHERE id = ?";
-    private static final String UPDATE_QUERY = "UPDATE orders SET payment_id = ?, shipment_id = ?, cart_id = ? WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE orders SET cart_id = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM orders WHERE id = ?";
 
     @Override
     public void create(Order order) {
         Connection connection = CONNECTION_POOL.getConnection();
-        try (PreparedStatement stmt = connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
-            stmt.setLong(1, order.getPayment().getId());
-            stmt.setLong(2, order.getShipment().getId());
-            stmt.setLong(3, order.getCart().getId());
+        try (PreparedStatement stmt = connection.prepareStatement(
+                "INSERT INTO orders (cart_id) VALUES (?)", // Poprawiona kolejność!
+                Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setLong(1, order.getCart().getId()); // Wstawiamy tylko `cart_id`
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
-                order.setId(rs.getLong(1));
+                order.setId(rs.getLong(1)); // Pobieramy ID utworzonego zamówienia
             }
+
         } catch (SQLException e) {
             throw new RuntimeException("Unable to create Order.", e);
         } finally {

@@ -40,4 +40,14 @@ public class DiscountServiceImpl implements DiscountService {
     public void delete(Long id) {
         discountRepository.delete(id);
     }
+
+    @Override
+    public List<Discount> getDiscountsByCategory(Long categoryId) {
+        return discountRepository.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public void addDiscountToCategory(Long discountId, Long categoryId) {
+        // Implementation for adding a discount to a category
+    }
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Define complex type for the "marketplace" element -->
+    <xs:complexType name="marketplaceType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="users" type="usersType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "user" element -->
+    <xs:complexType name="userType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="phone" type="xs:string"/>
+            <xs:element name="type" type="xs:boolean"/>
+            <xs:element name="active" type="xs:boolean"/>
+            <xs:element name="carts" type="cartsType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "users" element -->
+    <xs:complexType name="usersType">
+        <xs:sequence>
+            <xs:element name="user" type="userType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Define complex type for the "cart" element -->
+    <xs:complexType name="cartType">
+        <xs:sequence>
+            <xs:element name="products" type="productsType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "carts" element -->
+    <xs:complexType name="cartsType">
+        <xs:sequence>
+            <xs:element name="cart" type="cartType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Define complex type for the "product" element -->
+    <xs:complexType name="productType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="price" type="xs:double"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "products" element -->
+    <xs:complexType name="productsType">
+        <xs:sequence>
+            <xs:element name="product" type="productType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Define complex type for the "order" element -->
+    <xs:complexType name="orderType">
+        <xs:sequence>
+            <xs:element name="payment" type="paymentType"/>
+            <xs:element name="shipment" type="shipmentType"/>
+            <xs:element name="cart" type="cartType"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "payment" element -->
+    <xs:complexType name="paymentType">
+        <xs:sequence>
+            <xs:element name="type" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Define complex type for the "shipment" element -->
+    <xs:complexType name="shipmentType">
+        <xs:sequence>
+            <xs:element name="courier" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:long" use="required"/>
+    </xs:complexType>
+
+    <!-- Root element "marketplaces" must have zero or more "marketplace" elements -->
+    <xs:element name="marketplaces">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="marketplace" type="marketplaceType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

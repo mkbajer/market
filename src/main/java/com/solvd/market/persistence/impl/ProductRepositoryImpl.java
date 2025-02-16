@@ -1,5 +1,6 @@
 package com.solvd.market.persistence.impl;
 
+import com.solvd.market.domain.products.Category;
 import com.solvd.market.domain.products.Product;
 import com.solvd.market.persistence.ConnectionPool;
 import com.solvd.market.persistence.ProductRepository;
@@ -39,20 +40,22 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> findAll() {
         List<Product> products = new ArrayList<>();
-        Connection connection = CONNECTION_POOL.getConnection();
-        try (PreparedStatement stmt = connection.prepareStatement(FIND_ALL_QUERY)) {
-            ResultSet rs = stmt.executeQuery();
+        String query = "SELECT p.name AS product_name, c.name AS category_name FROM product p JOIN category c ON p.category_id = c.id";
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
                 Product product = new Product();
-                product.setId(rs.getLong("id"));
-                product.setName(rs.getString("name"));
-                product.setPrice(rs.getDouble("price"));
+                product.setName(rs.getString("product_name"));
+                Category category = new Category();
+                category.setName(rs.getString("category_name"));
+                product.setCategory(category);
                 products.add(product);
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException("Unable to fetch Products.", e);
-        } finally {
-            CONNECTION_POOL.releaseConnection(connection);
+            throw new RuntimeException("Unable to retrieve Products with Categories.", e);
         }
         return products;
     }

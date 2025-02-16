@@ -5,28 +5,31 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ConnectionPool {
 
-    private static ConnectionPool instance;
-
-    private final List<Connection> connections;
+    private static ConnectionPool instance; // Singleton instancja klasy
+    private final List<Connection> connections; // Lista połączeń do ponownego użycia
 
     private ConnectionPool() {
         try {
+            // Załadowanie sterownika JDBC
             Class.forName(Config.DRIVER.getValue());
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Unable to find Driver class.", e);
         }
 
-        int connectionPoolSize = Integer.parseInt(Config.POOL_SIZE.getValue());
-        this.connections = new ArrayList<>(connectionPoolSize);
-        IntStream.range(0, connectionPoolSize)
-                .boxed()
-                .forEach(index -> connections.add(createConnection()));
+        // Pobranie rozmiaru puli połączeń z konfiguracji
+        int poolSize = Integer.parseInt(Config.POOL_SIZE.getValue());
+        connections = new ArrayList<>(poolSize);
+
+        // Inicjalizacja puli połączeń
+        for (int i = 0; i < poolSize; i++) {
+            connections.add(createConnection());
+        }
     }
 
+    // Pobranie instancji ConnectionPool (Singleton)
     public static synchronized ConnectionPool getInstance() {
         if (instance == null) {
             instance = new ConnectionPool();
@@ -34,35 +37,34 @@ public class ConnectionPool {
         return instance;
     }
 
+    // Tworzy nowe połączenie z bazą danych
     private Connection createConnection() {
-        Connection connection;
         try {
-            connection = DriverManager.getConnection(Config.URL.getValue(), Config.USERNAME.getValue(), Config.PASSWORD.getValue());
+            return DriverManager.getConnection(
+                    Config.URL.getValue(),
+                    Config.USERNAME.getValue(),
+                    Config.PASSWORD.getValue()
+            );
         } catch (SQLException e) {
             throw new RuntimeException("Unable to create connection.", e);
         }
-        return connection;
     }
 
-    public Connection getConnection() {
-        synchronized (connections) {
-            if (connections.isEmpty()) {
-                try {
-                    while (connections.isEmpty()) {
-                        connections.wait();
-                    }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException("Unable to get connection.", e);
-                }
+    // Pobiera dostępne połączenie z puli
+    public synchronized Connection getConnection() {
+        while (connections.isEmpty()) {
+            try {
+                wait(); // Czeka na zwolnienie połączenia
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Thread interrupted while waiting for connection.", e);
             }
-            return connections.remove(connections.size() - 1);
         }
+        return connections.remove(connections.size() - 1);
     }
 
-    public void releaseConnection(Connection connection) {
-        synchronized (connections) {
-            connections.add(connection);
-            connections.notifyAll();
-        }
+    // Zwraca połączenie do puli i powiadamia czekające wątki
+    public synchronized void releaseConnection(Connection connection) {
+        connections.add(connection);
+        notifyAll(); // Powiadomienie wątków oczekujących na połączenie
     }
 }

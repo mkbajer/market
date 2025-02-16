@@ -13,11 +13,11 @@ import java.util.Optional;
 public class CartRepositoryImpl implements CartRepository {
     private static final ConnectionPool CONNECTION_POOL = ConnectionPool.getInstance();
 
-    private static final String INSERT_QUERY = "INSERT INTO carts (user_id) VALUES (?)";
-    private static final String FIND_ALL_QUERY = "SELECT * FROM carts";
-    private static final String FIND_BY_ID_QUERY = "SELECT * FROM carts WHERE id = ?";
-    private static final String UPDATE_QUERY = "UPDATE carts SET user_id = ? WHERE id = ?";
-    private static final String DELETE_QUERY = "DELETE FROM carts WHERE id = ?";
+    private static final String INSERT_QUERY = "INSERT INTO cart (user_id) VALUES (?)";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM cart";
+    private static final String FIND_BY_ID_QUERY = "SELECT * FROM cart WHERE id = ?";
+    private static final String UPDATE_QUERY = "UPDATE cart SET user_id = ? WHERE id = ?";
+    private static final String DELETE_QUERY = "DELETE FROM cart WHERE id = ?";
     private static final String INSERT_CART_PRODUCT_QUERY = "INSERT INTO cart_products (cart_id, product_id) VALUES (?, ?)";
     private static final String DELETE_CART_PRODUCTS_QUERY = "DELETE FROM cart_products WHERE cart_id = ?";
 

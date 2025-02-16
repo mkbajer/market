@@ -1,0 +1,85 @@
+{
+  "marketplaces": [
+    {
+      "id": 1,
+      "name": "SuperShop",
+      "users": [
+        {
+          "id": 1,
+          "name": "John",
+          "surname": "Doe",
+          "email": "john.doe@example.com",
+          "phone": "123456789",
+          "type": true,
+          "active": true,
+          "carts": [
+            {
+              "id": 1,
+              "products": [
+                {
+                  "id": 1,
+                  "name": "Laptop",
+                  "price": 1000.0
+                },
+                {
+                  "id": 2,
+                  "name": "Phone",
+                  "price": 500.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Jane",
+          "surname": "Smith",
+          "email": "jane.smith@example.com",
+          "phone": "987654321",
+          "type": false,
+          "active": true,
+          "carts": [
+            {
+              "id": 2,
+              "products": [
+                {
+                  "id": 2,
+                  "name": "Phone",
+                  "price": 500.0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "orders": [
+        {
+          "id": 1,
+          "payment": {
+            "id": 1,
+            "type": "Credit Card"
+          },
+          "shipment": {
+            "id": 1,
+            "courier": "DHL"
+          },
+          "cart": {
+            "id": 1,
+            "products": [
+              {
+                "id": 1,
+                "name": "Laptop",
+                "price": 1000.0
+              },
+              {
+                "id": 2,
+                "name": "Phone",
+                "price": 500.0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
