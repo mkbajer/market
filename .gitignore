@@ -5,7 +5,11 @@
 /target/
 /src/main/resources/sql model.mwb.bak
 /desktop.ini
-
+/src/main/java/com/solvd/market/JacksonJsonExample.java
+/src/main/java/com/solvd/market/JAXBExample.java
+/src/main/java/com/solvd/market/MainTest.java
+/category.json
+/marketplace.xml
 
 ### IntelliJ IDEA ###
 *.iws

@@ -1,13 +1,28 @@
 package com.solvd.market.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.solvd.market.domain.users.User;
+import jakarta.xml.bind.annotation.*;
 
 import java.util.List;
 
+@JsonPropertyOrder({"id", "name", "users"})
+@XmlRootElement(name = "marketplace")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MarketPlace {
 
+    @JsonProperty("id")
+    @XmlElement(name = "id")
     private Long id;
+
+    @JsonProperty("name")
+    @XmlElement(name = "name")
     private String name;
+
+    @JsonProperty("users")
+    @XmlElementWrapper(name = "users")
+    @XmlElement(name = "user")
     private List<User> users;
 
     public Long getId() {

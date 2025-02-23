@@ -1,12 +1,22 @@
 package com.solvd.market.domain.shipments;
 
-public class Address {
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Address {
+    @XmlElement(name = "id")
     private Long id;
+    @XmlElement(name = "street")
     private String street;
+    @XmlElement(name = "homeNr")
     private Integer homeNr;
+    @XmlElement(name = "flatNr")
     private Integer flatNr;
+    @XmlElement(name = "city")
     private String city;
+    @XmlElement(name = "postCode")
     private String postCode;
 
 

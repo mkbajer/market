@@ -1,12 +1,29 @@
 package com.solvd.market.domain.products;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
+@JsonPropertyOrder({"id", "name", "price", "category"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Product {
 
+    @JsonProperty("id")
+    @XmlElement(name = "id")
     private Long id;
+
+    @JsonProperty("name")
+    @XmlElement(name = "name")
     private String name;
+
+    @JsonProperty("price")
+    @XmlElement(name = "price")
     private Double price;
+
+    @JsonProperty("category")
+    @XmlElement(name = "category")
     private Category category;
 
     public Long getId() {

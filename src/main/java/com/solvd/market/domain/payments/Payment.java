@@ -1,8 +1,14 @@
 package com.solvd.market.domain.payments;
 
-public class Payment {
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Payment {
+    @XmlElement(name = "id")
     private Long id;
+    @XmlElement(name = "type")
     private String type;
 
     public Long getId() {

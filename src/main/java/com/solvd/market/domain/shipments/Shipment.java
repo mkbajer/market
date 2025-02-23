@@ -1,9 +1,16 @@
 package com.solvd.market.domain.shipments;
 
-public class Shipment {
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Shipment {
+    @XmlElement(name = "id")
     private Long id;
+    @XmlElement(name = "courier")
     private String courier;
+    @XmlElement(name = "address")
     private Address address;
 
     public Long getId() {

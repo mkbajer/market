@@ -1,19 +1,54 @@
 package com.solvd.market.domain.users;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.solvd.market.domain.orders.Cart;
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 
 import java.util.List;
 
+@JsonPropertyOrder({"id", "name", "surname", "email", "phone", "type", "active", "carts"})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class User {
 
+    @JsonProperty("id")
+    @XmlElement(name = "id")
     private Long id;
+
+    @JsonProperty("name")
+    @XmlElement(name = "name")
     private String name;
+
+    @JsonProperty("surname")
+    @XmlElement(name = "surname")
     private String surname;
+
+    @JsonProperty("email")
+    @XmlElement(name = "email")
     private String email;
+
+    @JsonProperty("password")
+    @XmlElement(name = "password")
     private String password;
+
+    @JsonProperty("phone")
+    @XmlElement(name = "phone")
     private String phone;
+
+    @JsonProperty("type")
+    @XmlElement(name = "type")
     private Boolean type;
+
+    @JsonProperty("active")
+    @XmlElement(name = "active")
     private Boolean active;
+
+    @JsonProperty("carts")
+    @XmlElementWrapper(name = "carts")
+    @XmlElement(name = "carts")
     private List<Cart> carts;
 
     public Long getId() {
