@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.MarketPlaceRepository">
+
+    <!-- INSERT -->
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO market_places (name) VALUES (#{name});
+    </insert>
+
+    <!-- SQL Fragment: Common SELECT fields -->
+    <sql id="findBody">
+        mp.id as marketplace_id,
+        mp.name as marketplace_name,
+        <include refid="com.solvd.market.mapper.UserMapper.findBody"/>
+    </sql>
+
+    <!-- SQL Fragment: Common FROM clause -->
+    <sql id="findJoins">
+        market_places mp
+        LEFT JOIN users u ON mp.id = u.market_place_id
+    </sql>
+
+    <!-- SQL Fragment: Reusable SELECT -->
+    <sql id="find">
+        SELECT
+        <include refid="findBody" />
+        FROM
+        <include refid="findJoins" />
+    </sql>
+
+    <!-- SELECT BY ID -->
+    <select id="findById" resultMap="MarketPlaceResultMap">
+        <include refid="find"/>
+        WHERE mp.id = #{id}
+    </select>
+
+    <!-- SELECT ALL -->
+    <select id="findAll" resultMap="MarketPlaceResultMap">
+        <include refid="find"/>
+    </select>
+
+    <!-- UPDATE -->
+    <update id="update">
+        UPDATE market_places SET name = #{name} WHERE id = #{id};
+    </update>
+
+    <!-- DELETE -->
+    <delete id="deleteById">
+        DELETE FROM market_places WHERE id = #{id};
+    </delete>
+
+    <!-- Result Mapping -->
+    <resultMap id="MarketPlaceResultMap" type="com.solvd.market.domain.MarketPlace" autoMapping="false">
+        <id property="id" column="marketplace_id"/>
+        <result property="name" column="marketplace_name"/>
+        <collection property="users" ofType="com.solvd.market.domain.users.User" 
+                    resultMap="com.solvd.market.mapper.UserMapper.UserResultMap"/>
+    </resultMap>
+
+</mapper>
