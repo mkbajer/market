@@ -21,6 +21,12 @@ public class CartRepositoryImpl implements CartRepository {
     private static final String INSERT_CART_PRODUCT_QUERY = "INSERT INTO cart_products (cart_id, product_id) VALUES (?, ?)";
     private static final String DELETE_CART_PRODUCTS_QUERY = "DELETE FROM cart_products WHERE cart_id = ?";
 
+    private static Cart mapRow(ResultSet rs) throws SQLException {
+        Cart cart = new Cart();
+        cart.setId(rs.getLong("id"));
+        return cart;
+    }
+
     @Override
     public void create(Cart cart) {
         Connection connection = CONNECTION_POOL.getConnection();
@@ -137,11 +143,5 @@ public class CartRepositoryImpl implements CartRepository {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
-    }
-
-    private static Cart mapRow(ResultSet rs) throws SQLException {
-        Cart cart = new Cart();
-        cart.setId(rs.getLong("id"));
-        return cart;
     }
 }

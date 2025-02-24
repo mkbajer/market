@@ -17,7 +17,6 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.UUID;
 
 public class Main {
@@ -109,7 +108,7 @@ public class Main {
         Discount discount = new Discount();
         discount.setName("Holiday Sale");
         discount.setAmount(10.0);
-        discount = discountService.create(discount,3L);
+        discount = discountService.create(discount, 3L);
         discountService.addDiscountToCategory(discount.getId(), category.getId()); // Add discount to category
 
         Product product1 = new Product();

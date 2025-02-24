@@ -2,7 +2,7 @@ package com.solvd.market.service.impl;
 
 import com.solvd.market.domain.MarketPlace;
 import com.solvd.market.persistence.MarketPlaceRepository;
-import com.solvd.market.persistence.impl.MarketPlaceRepositoryImpl;
+import com.solvd.market.persistence.impl.MarketPlaceMapperImpl;
 import com.solvd.market.service.MarketPlaceService;
 import com.solvd.market.service.UserService;
 
@@ -14,7 +14,8 @@ public class MarketPlaceServiceImpl implements MarketPlaceService {
     private final UserService userService;
 
     public MarketPlaceServiceImpl() {
-        this.marketPlaceRepository = new MarketPlaceRepositoryImpl();
+        // this.marketPlaceRepository = new MarketPlaceRepositoryImpl();
+        this.marketPlaceRepository = new MarketPlaceMapperImpl();
         this.userService = new UserServiceImpl();
     }
 

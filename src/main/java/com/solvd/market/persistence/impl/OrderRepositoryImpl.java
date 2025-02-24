@@ -18,6 +18,12 @@ public class OrderRepositoryImpl implements OrderRepository {
     private static final String UPDATE_QUERY = "UPDATE orders SET cart_id = ? WHERE id = ?";
     private static final String DELETE_QUERY = "DELETE FROM orders WHERE id = ?";
 
+    private static Order mapRow(ResultSet rs) throws SQLException {
+        Order order = new Order();
+        order.setId(rs.getLong("id"));
+        return order;
+    }
+
     @Override
     public void create(Order order) {
         Connection connection = CONNECTION_POOL.getConnection();
@@ -56,6 +62,7 @@ public class OrderRepositoryImpl implements OrderRepository {
         }
         return orders;
     }
+
     @Override
     public Optional<Order> findById(Long id) {
         Order order = null;
@@ -101,11 +108,5 @@ public class OrderRepositoryImpl implements OrderRepository {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
-    }
-
-    private static Order mapRow(ResultSet rs) throws SQLException {
-        Order order = new Order();
-        order.setId(rs.getLong("id"));
-        return order;
     }
 }

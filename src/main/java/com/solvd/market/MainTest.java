@@ -1,7 +1,8 @@
 package com.solvd.market;
-import java.sql.Connection;
 
 import com.solvd.market.persistence.ConnectionPool;
+
+import java.sql.Connection;
 
 public class MainTest {
     public static void main(String[] args) {

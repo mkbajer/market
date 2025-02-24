@@ -4,7 +4,10 @@ import com.solvd.market.domain.products.Discount;
 import com.solvd.market.persistence.ConnectionPool;
 import com.solvd.market.persistence.DiscountRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -142,6 +145,7 @@ public class DiscountRepositoryImpl implements DiscountRepository {
         }
         return discounts;
     }
+
     @Override
     public void addDiscountToCategory(Long discountId, Long categoryId) {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
