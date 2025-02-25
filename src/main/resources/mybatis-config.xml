@@ -20,5 +20,11 @@
     </environments>
     <mappers>
         <mapper resource="mappers/MarketPlaceMapper.xml"/>
+        <mapper resource="mappers/UserMapper.xml"/>
+        <mapper resource="mappers/CartMapper.xml"/>
+        <mapper resource="mappers/ShipmentMapper.xml"/>
+        <mapper resource="mappers/OrderMapper.xml"/>
+        <mapper resource="mappers/ProductMapper.xml"/>
+        <mapper resource="mappers/PaymentMapper.xml"/>
     </mappers>
 </configuration>

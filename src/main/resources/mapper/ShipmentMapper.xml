@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.ShipmentRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO shipments (courier, order_id) VALUES (#{courier}, #{orderId});
+    </insert>
+
+    <select id="findAll" resultType="com.solvd.market.domain.shipments.Shipment">
+        SELECT id, courier FROM shipments;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.solvd.market.domain.shipments.Shipment">
+        SELECT id, courier FROM shipments WHERE id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE shipments SET courier = #{courier} WHERE id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM shipments WHERE id = #{id};
+    </delete>
+
+</mapper>

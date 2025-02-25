@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.OrderRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO orders (cart_id, payment_id, shipment_id) VALUES (#{cart.id}, #{payment.id}, #{shipment.id});
+    </insert>
+
+    <select id="findAll" resultType="com.solvd.market.domain.orders.Order">
+        SELECT id, cart_id, payment_id, shipment_id FROM orders;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.solvd.market.domain.orders.Order">
+        SELECT id, cart_id, payment_id, shipment_id FROM orders WHERE id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE orders SET cart_id = #{cart.id}, payment_id = #{payment.id}, shipment_id = #{shipment.id} WHERE id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM orders WHERE id = #{id};
+    </delete>
+
+</mapper>

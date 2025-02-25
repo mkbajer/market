@@ -2,6 +2,7 @@ package com.solvd.market.service.impl;
 
 import com.solvd.market.domain.users.User;
 import com.solvd.market.persistence.UserRepository;
+import com.solvd.market.persistence.impl.UserMapperImpl;
 import com.solvd.market.persistence.impl.UserRepositoryImpl;
 import com.solvd.market.service.UserService;
 
@@ -13,7 +14,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     public UserServiceImpl() {
-        this.userRepository = new UserRepositoryImpl();
+        //this.userRepository = new UserRepositoryImpl();
+        this.userRepository = new UserMapperImpl();
     }
 
     @Override

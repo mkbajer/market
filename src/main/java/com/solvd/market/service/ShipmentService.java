@@ -5,6 +5,7 @@ import com.solvd.market.domain.shipments.Shipment;
 import java.util.List;
 
 public interface ShipmentService {
+
     Shipment create(Shipment shipment, Long orderId);
 
     List<Shipment> retrieveAll();

@@ -11,6 +11,7 @@ public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
 
     public PaymentServiceImpl() {
+        //this.paymentRepository = new PaymentRepositoryImpl();
         this.paymentRepository = new PaymentRepositoryImpl();
     }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.ProductRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO products (name, price, category_id) VALUES (#{name}, #{price}, #{category.id});
+    </insert>
+
+    <select id="findAll" resultType="com.solvd.market.domain.products.Product">
+        SELECT id, name, price, category_id FROM products;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.solvd.market.domain.products.Product">
+        SELECT id, name, price, category_id FROM products WHERE id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE products SET name = #{name}, price = #{price}, category_id = #{category.id} WHERE id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM products WHERE id = #{id};
+    </delete>
+
+</mapper>

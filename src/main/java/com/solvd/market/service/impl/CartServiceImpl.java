@@ -2,6 +2,7 @@ package com.solvd.market.service.impl;
 
 import com.solvd.market.domain.orders.Cart;
 import com.solvd.market.persistence.CartRepository;
+import com.solvd.market.persistence.impl.CartMapperImpl;
 import com.solvd.market.persistence.impl.CartRepositoryImpl;
 import com.solvd.market.service.CartService;
 
@@ -12,7 +13,8 @@ public class CartServiceImpl implements CartService {
     private final CartRepository cartRepository;
 
     public CartServiceImpl() {
-        this.cartRepository = new CartRepositoryImpl();
+        //this.cartRepository = new CartRepositoryImpl();
+        this.cartRepository = new CartMapperImpl();
     }
 
     @Override

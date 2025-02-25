@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.UserRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO users (name, surname, email, phone, type, active) VALUES (#{name}, #{surname}, #{email}, #{phone}, #{type}, #{active});
+    </insert>
+
+    <select id="findAll" resultType="com.solvd.market.domain.users.User">
+        SELECT id, name, surname, email, phone, type, active FROM users;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.solvd.market.domain.users.User">
+        SELECT id, name, surname, email, phone, type, active FROM users WHERE id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE users SET name = #{name}, surname = #{surname}, email = #{email}, phone = #{phone}, type = #{type}, active = #{active} WHERE id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM users WHERE id = #{id};
+    </delete>
+
+</mapper>

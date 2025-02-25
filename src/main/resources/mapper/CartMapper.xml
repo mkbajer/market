@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.market.persistence.CartRepository">
+
+    <insert id="create" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO carts (user_id) VALUES (#{user.id});
+    </insert>
+
+    <select id="findAll" resultType="com.solvd.market.domain.orders.Cart">
+        SELECT id, user_id FROM carts;
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.solvd.market.domain.orders.Cart">
+        SELECT id, user_id FROM carts WHERE id = #{id};
+    </select>
+
+    <update id="update">
+        UPDATE carts SET user_id = #{user.id} WHERE id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM carts WHERE id = #{id};
+    </delete>
+
+</mapper>

@@ -5,6 +5,7 @@ import com.solvd.market.domain.payments.Payment;
 import java.util.List;
 
 public interface PaymentRepository {
+
     void create(Payment payment, Long orderId);
 
     List<Payment> findAll();

@@ -2,6 +2,7 @@ package com.solvd.market.service.impl;
 
 import com.solvd.market.domain.orders.Order;
 import com.solvd.market.persistence.OrderRepository;
+import com.solvd.market.persistence.impl.OrderMapperImpl;
 import com.solvd.market.persistence.impl.OrderRepositoryImpl;
 import com.solvd.market.service.OrderService;
 
@@ -12,7 +13,8 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     public OrderServiceImpl() {
-        this.orderRepository = new OrderRepositoryImpl();
+        //this.orderRepository = new OrderRepositoryImpl();
+        this.orderRepository = new OrderMapperImpl();
     }
 
     @Override
